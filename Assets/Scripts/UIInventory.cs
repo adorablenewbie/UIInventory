@@ -63,22 +63,26 @@ public class UIInventory : MonoBehaviour
     {
         usedSlotsText.text = $"{usedSlotCount}";
         maxSlotsText.text = $"/ {maxSlotCount}";
-        if(((float)maxSlotCount / (float)usedSlotCount) >= 0.8)
+        if(((float)usedSlotCount / (float)maxSlotCount ) >= 0.8)
         {
             usedSlotsText.color = Color.red;
         }
-
-        for (int i = 0; i < slots.Length; i++)
+        else
         {
-            if (slots[i].item != null)
-            {
-                slots[i].Set();
-            }
-            else
-            {
-                slots[i].Clear();
-            }
+            usedSlotsText.color = Color.black;
         }
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].item != null)
+                {
+                    slots[i].Set();
+                }
+                else
+                {
+                    slots[i].Clear();
+                }
+            }
     }
 
     void ClearSelectedItemWindow()
@@ -102,6 +106,7 @@ public class UIInventory : MonoBehaviour
         if (emptySlot != null)
         {
             emptySlot.item = data;
+            usedSlotCount++;
             UpdateUI();
             return;
         }

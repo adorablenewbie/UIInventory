@@ -19,3 +19,13 @@ MonoBehaviour:
   itemStats:
   - status: 1
     value: 5
+  - status: 0
+    value: 10
+  - status: 2
+    value: 3
+  - status: 3
+    value: 4
+  - status: 4
+    value: 1
+  - status: 5
+    value: 2
