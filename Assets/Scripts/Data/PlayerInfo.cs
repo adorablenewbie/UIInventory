@@ -7,6 +7,11 @@ public enum EJob
     코린이
 }
 
+public enum EItem
+{
+
+}
+
 [CreateAssetMenu(fileName ="NewPlayerData", menuName = "New Player Data")]
 public class PlayerInfo : ScriptableObject
 {

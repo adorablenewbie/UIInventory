@@ -12,10 +12,6 @@ public class UIStatus : MonoBehaviour
     public TextMeshProUGUI avdText;
 
     
-    void OnEnable()
-    {
-        UpdateStatus();
-    }
     public void UpdateStatus()
     {
         hpText.text = $"{GameManager.Instance.character.health}";

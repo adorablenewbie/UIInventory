@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,12 @@ public class Character : MonoBehaviour
 
     public PlayerInfo playerInfo;
 
+    public Equipment equip;
+
 
     private void Start()
     {
+        equip = GetComponent<Equipment>();
         InitializeData();
         GameManager.Instance.character = this;
     }
@@ -43,5 +47,30 @@ public class Character : MonoBehaviour
         critical = playerInfo.critical;
         speed = playerInfo.speed;
         avoid = playerInfo.avoid;
+    }
+    
+    public void AddStat(EStatus eStatus, float value)
+    {
+        switch (eStatus)
+        {
+            case EStatus.Health:
+                health += value;
+                break;
+            case EStatus.Attack:
+                attack += value;
+                break;
+            case EStatus.Defense:
+                defense += value;
+                break;
+            case EStatus.Critical:
+                critical += value;
+                break;
+            case EStatus.Speed:
+                speed += value;
+                break;
+            case EStatus.Avoid:
+                avoid += value;
+                break;
+        }
     }
 }

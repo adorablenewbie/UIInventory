@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [Header("버튼 친구들")]
     public Button inventoryCloseButton;
     public Button statusCloseButton;
+    public Button equipButton;
+    public Button unEquiButton;
 
     [Header("UI 객체 친구들")]
     public GameObject inventoryPanel;
@@ -17,9 +19,12 @@ public class UIManager : MonoBehaviour
     public GameObject statusButton;
 
     [Header("UI스크립트 친구들")]
-    [SerializeField] private UIMainMenu uiMainMenu;
-    [SerializeField] private UIInventory uiInventory;
-    [SerializeField] private UIStatus uiStatus;
+    public UIMainMenu uiMainMenu;
+    public  UIInventory uiInventory;
+    public UIStatus uiStatus;
+
+    [Header("테스트용 아이템 친구")]
+    [SerializeField] private ItemData testItemData;
 
     private void Awake()
     {
@@ -36,7 +41,19 @@ public class UIManager : MonoBehaviour
         inventoryCloseButton.onClick.AddListener(CloseInventory);
         statusCloseButton.onClick.AddListener(CloseStatus);
 
+        equipButton.onClick.AddListener(uiInventory.OnEquipButton);
+        unEquiButton.onClick.AddListener(uiInventory.OnUnEquipButton);
+
         uiMainMenu.UpdateMainUI();
+        uiInventory.InitInventory();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            uiInventory.AddItem(testItemData);
+        }
     }
 
     // 인벤토리 열기/닫기
@@ -45,6 +62,7 @@ public class UIManager : MonoBehaviour
         inventoryPanel.SetActive(true);
         inventoryButton.SetActive(false);
         statusButton.SetActive(false);
+        uiInventory.UpdateUI();
     }
 
     public void OpenStatus()
@@ -52,11 +70,13 @@ public class UIManager : MonoBehaviour
         statusPanel.SetActive(true);
         inventoryButton.SetActive(false);
         statusButton.SetActive(false);
+        uiStatus.UpdateStatus();
     }
 
     public void CloseInventory()
     {
         inventoryPanel.SetActive(false);
+        uiInventory.itemDataPanel.SetActive(false);
         inventoryButton.SetActive(true);
         statusButton.SetActive(true);
     }
